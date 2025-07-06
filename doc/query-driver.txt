@@ -1,0 +1,62 @@
+
+*query-driver.txt*    Plugin for setting clangd's --query-driver flag
+
+===============================================================================
+INTRODUCTION                    *query-driver-introduction*
+
+This plugin generates the `--query-driver` flag for clangd by inspecting
+`compile_commands.json`. Useful for cross-compilation environments.
+
+===============================================================================
+FUNCTIONS                            *query-driver-functions*
+
+get_query_driver_flag({candidates})      *get_query_driver_flag()*
+    Parameters:
+      {candidates}  (optional) List of candidate paths (string or function
+                    returning string). Default candidates:
+                    [1] './compile_commands.json'
+                    [2] Parse '.clangd' for CompilationDatabase entry
+
+    Return:
+      String: "--query-driver=<path_pattern>" if needed toolchain is found
+      Nil: if no special driver configuration needed
+
+    Example:
+>lua
+      local flag = require('query-driver').get_query_driver_flag()
+      if flag then
+        table.insert(clangd_args, flag)
+      end
+<
+
+===============================================================================
+USAGE                                    *query-driver-usage*
+
+Typical clangd configuration:
+>lua
+  -- lsp/clangd.lua
+
+  return {
+    cmd = {
+      "clangd",
+      "--background-index",
+      require('query-driver').get_query_driver_flag() or ""
+    }
+  }
+<
+
+===============================================================================
+WHEN TO USE                          *query-driver-when-to-use*
+
+Use when:
+- Working with cross-compilation toolchains
+- Compilers not in $PATH
+- Clangd reports missing compilers
+
+Do NOT use when:
+- Toolchains are in standard paths (/usr/bin, /usr/local/bin)
+- Using well-organized toolchain directories like:
+    /opt/toolchains/<name>/usr/bin/<toolchain>-*
+- Native compilation without cross-compilers
+
+vim:tw=78:ft=help:norl:
