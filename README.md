@@ -1,11 +1,7 @@
 # query-driver.nvim
 
-> [!INFO]
+> [!NOTE]
 > Did it just worked?
-
-> [!WARNING]
-> Molten is a remote plugin [read this](https://github.com/benlubas/molten-nvim/blob/main/docs/Not-So-Quick-Start-Guide.md#a-note-on-remote-plugins)
-> if you don't know what that means
 
 Neovim plugin that automatically generates the `--query-driver` flag for clangd
 based on your project's `compile_commands.json`. Designed for cross-compilation.
