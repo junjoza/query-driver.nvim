@@ -1,6 +1,7 @@
 # query-driver.nvim
 
 > [!INFO]
+>
 > Did it just worked?
 
 Neovim plugin that automatically generates the `--query-driver` flag for clangd
