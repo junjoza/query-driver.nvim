@@ -6,6 +6,9 @@
 Neovim plugin that automatically generates the `--query-driver` flag for clangd
 based on your project's `compile_commands.json`. Designed for cross-compilation.
 
+> [!IMPORTANT]
+> Here is something very important!
+
 ## Table of Contents
 
 - [Requirements](#requirements)
